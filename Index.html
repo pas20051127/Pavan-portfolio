@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex | Visual Designer</title>
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --bg: #111111;
+            --text: #f0f0f0;
+            --accent: #ccff00; /* Electric Lime */
+            --gray: #888888;
+            --font-main: 'Helvetica Neue', sans-serif;
+            --font-display: 'Arial Black', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; } /* Hiding default cursor for custom one */
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: var(--font-main);
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; }
+
+        /* --- CUSTOM CURSOR --- */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.2s, height 0.2s;
+            mix-blend-mode: difference;
+        }
+        
+        body:hover .cursor.active {
+            width: 50px;
+            height: 50px;
+            background: var(--accent);
+        }
+
+        /* --- LAYOUT UTILITIES --- */
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 120px 0;
+            border-bottom: 1px solid #222;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: 8vw;
+            line-height: 0.9;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: slideUp 1s forwards 0.5s;
+        }
+
+        .hero h1 span {
+            color: var(--accent); /* Highlight color */
+            display: block;
+        }
+
+        .hero p {
+            margin-top: 2rem;
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 500px;
+            opacity: 0;
+            animation: slideUp 1s forwards 0.8s;
+        }
+
+        /* --- WORK GRID --- */
+        .work-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 60px;
+        }
+
+        .project-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 60vh;
+            background-color: #222;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+            filter: grayscale(100%);
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.05);
+            filter: grayscale(0%);
+        }
+
+        .project-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: 20px;
+        }
+
+        .project-title {
+            font-size: 3rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .project-cat {
+            font-family: monospace;
+            color: var(--gray);
+        }
+
+        /* --- SERVICES --- */
+        .services-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .service-item {
+            border: 1px solid #333;
+            padding: 40px;
+            transition: 0.3s;
+        }
+
+        .service-item:hover {
+            border-color: var(--accent);
+            background: #1a1a1a;
+        }
+
+        .service-number {
+            font-family: monospace;
+            color: var(--accent);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .cta {
+            font-size: 5vw;
+            font-family: var(--font-display);
+            text-decoration: underline;
+            text-decoration-thickness: 3px;
+            text-underline-offset: 10px;
+        }
+        
+        .cta:hover {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes slideUp {
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Mobile Responsive */
+        @media(max-width: 768px) {
+            .hero h1 { font-size: 15vw; }
+            .project-title { font-size: 1.5rem; }
+            .cursor { display: none; } /* Hide custom cursor on touch screens */
+            * { cursor: auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+
+    <div class="container">
+        
+        <!-- HERO -->
+        <section class="hero">
+            <h1>Digital<br><span>Designer</span></h1>
+            <p>I craft minimal, kinetic interfaces for brands that want to stand out.</p>
+        </section>
+
+        <!-- SELECTED WORKS -->
+        <section id="work">
+            <div class="work-grid">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2000&auto=format&fit=crop" alt="Project 1" class="project-image">
+                    <div class="project-info">
+                        <div class="project-title">Neon Flux</div>
+                        <div class="project-cat">Art Direction</div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2000&auto=format&fit=crop" alt="Project 2" class="project-image">
+                    <div class="project-info">
+                        <div class="project-title">Type.Works</div>
+                        <div class="project-cat">Web Design</div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=2000&auto=format&fit=crop" alt="Project 3" class="project-image">
+                    <div class="project-info">
+                        <div class="project-title">Abstract</div>
+                        <div class="project-cat">3D Rendering</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICES -->
+        <section id="services">
+            <div class="services-list">
+                <div class="service-item">
+                    <span class="service-number">01</span>
+                    <h3>UI/UX Design</h3>
+                    <p style="color: #888; margin-top: 10px;">Interfaces that feel intuitive and invisible.</p>
+                </div>
+                <div class="service-item">
+                    <span class="service-number">02</span>
+                    <h3>Creative Direction</h3>
+                    <p style="color: #888; margin-top: 10px;">Defining the visual voice of your brand.</p>
+                </div>
+                <div class="service-item">
+                    <span class="service-number">03</span>
+                    <h3>Development</h3>
+                    <p style="color: #888; margin-top: 10px;">Bringing designs to life with clean code.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer>
+            <p style="margin-bottom: 20px; color: var(--gray);">Ready to collaborate?</p>
+            <a href="mailto:hello@alex.design" class="cta">Let's Talk</a>
+            
+            <div style="margin-top: 80px; display: flex; justify-content: space-between; color: #444; font-family: monospace;">
+                <span>© 2024 Alex Design</span>
+                <span>Instagram / Twitter / LinkedIn</span>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        // Custom Cursor Logic
+        const cursor = document.querySelector('.cursor');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        document.addEventListener('mousedown', () => {
+            cursor.classList.add('active');
+        });
+
+        document.addEventListener('mouseup', () => {
+            cursor.classList.remove('active');
+        });
+
+        // Add hover effect to links
+        const links = document.querySelectorAll('a, .project-card');
+        links.forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                cursor.classList.add('active');
+            });
+            link.addEventListener('mouseleave', () => {
+                cursor.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
